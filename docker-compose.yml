@@ -1,0 +1,13 @@
+name: icbc-appointment-checker
+services:
+  icbc-appointment-checker:
+    build: .
+    environment:
+      - CRON_SCHEDULE=0 * * * *
+      - TZ=America/Vancouver
+    container_name: icbc-appointment-checker
+    image: icbc-appointment-checker:latest
+    restart: on-failure:5
+    volumes:
+      - /host-path-here/config.yml:/app/config.yml
+      - /host-path-here/appointments.txt:/root/appointments.txt # root because of cron or something
