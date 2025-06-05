@@ -10,6 +10,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from faker import Faker
+from datetime import datetime, timedelta
 
 # Load configuration from YAML file
 def load_config(config_path):
@@ -63,10 +64,13 @@ def get_appointments(config, token):
     headers = generate_headers()
     headers['Authorization'] = token
     
+    exam_date = config['icbc'].get('examDate')
+    if not exam_date:
+        exam_date = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
     payload = {
         "aPosID": config['icbc']['posID'],
         "examType": str(config['icbc']['examClass']) + "-R-1",
-        "examDate": config['icbc']['examDate'],  # Ensure this value is correct
+        "examDate": exam_date,
         "prfDaysOfWeek": config['icbc']['prfDaysOfWeek'],
         "prfPartsOfDay": config['icbc']['prfPartsOfDay'],
         "lastName": config['icbc']['drvrLastName'],
@@ -186,8 +190,6 @@ def update_appointments_if_needed(new_appointments, old_appointments, config):
 
     # Get the earliest date of new appointments
     new_first_date = min(appt["appointmentDt"]["date"] for appt in new_appointments) if new_appointments else None
-
-    
 
     logger.info(f"Old first date: {old_first_date}, New first date: {new_first_date}")
 

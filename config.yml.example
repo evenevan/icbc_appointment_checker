@@ -2,7 +2,7 @@ icbc:
   drvrLastName: "YourLastName"
   licenceNumber: "YourLicenceNumber"
   keyword: "YourKeyword"
-  examDate: "The earliest date you can take the exam as YYYY-MM-DD"
+  examDate: "The earliest date you can take the exam as YYYY-MM-DD. Omit if you are past the earliest date."
   earliestDate: "2024-05-01"
   latestDate: "2024-06-01"
   earliestTime: "08:00"
