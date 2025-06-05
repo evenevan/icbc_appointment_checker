@@ -44,13 +44,13 @@ This script checks for available road test appointments at various ICBC location
      drvrLastName: "YourLastName"
      licenceNumber: "YourLicenceNumber"
      keyword: "YourKeyword"
-     examDate: "The earliest date you can take the exam as YYYY-MM-DD"
-     expactAfterDate: "2024-05-01"
-     expactBeforeDate: "2024-06-01"
-     expactAfterTime: "08:00"
-     expactBeforeTime: "17:00"
+     examDate: "The earliest date you can take the exam as YYYY-MM-DD. Delete this field if you are past the earliest date."
+     earliestDate: "2024-05-01"
+     latestDate: "2024-06-01"
+     earliestTime: "08:00"
+     latestTime: "17:00"
      examClass: "5"
-     posID: 273
+     posID: "8"
      prfDaysOfWeek: "[0,1,2,3,4,5,6]"
      prfPartsOfDay: "[0,1]"
 
@@ -58,7 +58,7 @@ This script checks for available road test appointments at various ICBC location
      smtp_server: "smtp.your-email-provider.com"
      smtp_port: 587
      sender_address: "your_email@provider.com"
-     sender_pass: "your_application_specific_password"
+     sender_pass: "your_password"
      receiver_addresses:
        - "receiver1_email@provider.com"
        - "receiver2_email@provider.com"
