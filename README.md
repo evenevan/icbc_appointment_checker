@@ -44,6 +44,7 @@ This script checks for available road test appointments at various ICBC location
      drvrLastName: "YourLastName"
      licenceNumber: "YourLicenceNumber"
      keyword: "YourKeyword"
+     examDate: "The earliest date you can take the exam as YYYY-MM-DD"
      expactAfterDate: "2024-05-01"
      expactBeforeDate: "2024-06-01"
      expactAfterTime: "08:00"

@@ -65,8 +65,7 @@ def get_appointments(config, token):
     payload = {
         "aPosID": config['icbc']['posID'],
         "examType": str(config['icbc']['examClass']) + "-R-1",
-        "examDate": config['icbc']['expactAfterDate'],  # Ensure this value is correct
-        "ignoreReserveTime": "false",
+        "examDate": config['icbc']['examDate'],  # Ensure this value is correct
         "prfDaysOfWeek": config['icbc']['prfDaysOfWeek'],
         "prfPartsOfDay": config['icbc']['prfPartsOfDay'],
         "lastName": config['icbc']['drvrLastName'],
