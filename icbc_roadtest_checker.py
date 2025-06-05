@@ -1,4 +1,5 @@
 import argparse
+import math
 import requests
 import json
 import yaml
@@ -89,9 +90,9 @@ def get_appointments(config, token):
                 date = appt["appointmentDt"]["date"]
                 time = appt["startTm"]
                 
-                # Validate date and time
-                if (config['icbc']['expactAfterDate'] <= date <= config['icbc']['expactBeforeDate'] and
-                    config['icbc']['expactAfterTime'] <= time <= config['icbc']['expactBeforeTime']):
+                # Filter based on the configured date and time ranges
+                if (config['icbc']['earliestDate'] <= date <= config['icbc']['latestDate'] and
+                    config['icbc']['earliestTime'] <= time <= config['icbc']['latestTime']):
                     filtered_appointments.append(appt)
 
             logger.info(f"Filtered Appointments: {filtered_appointments}")  # Print filtered appointments
@@ -178,13 +179,17 @@ def update_appointments_if_needed(new_appointments, old_appointments, config):
     if not old_appointments:
         logger.info("No previous appointments found. Saving new appointments.")
         save_appointments_to_txt(new_appointments, 'appointments.txt')
-        return
+        # return
 
     # Get the earliest date of old appointments
-    old_first_date = min(appt["appointmentDt"]["date"] for appt in old_appointments)
+    old_first_date = min(appt["appointmentDt"]["date"] for appt in old_appointments) if old_appointments else "9999-12-31"
 
     # Get the earliest date of new appointments
     new_first_date = min(appt["appointmentDt"]["date"] for appt in new_appointments) if new_appointments else None
+
+    
+
+    logger.info(f"Old first date: {old_first_date}, New first date: {new_first_date}")
 
     # Check for changes
     if compare_appointments(old_appointments, new_appointments):
